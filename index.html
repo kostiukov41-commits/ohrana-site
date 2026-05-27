@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Отдел вневедомственной охраны - Личный кабинет</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:;">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#1e3c72">
+    <meta name="description" content="Отдел вневедомственной охраны - профессиональная охрана объектов и безопасность граждан">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ВЕСЬ ВАШ CSS ОСТАЁТСЯ БЕЗ ИЗМЕНЕНИЙ */
+        :root {
+            --primary: #1e3c72;
+            --primary-light: #2a5298;
+            --secondary: #34495e;
+            --accent: #e8491d;
+            --accent-hover: #c0392b;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-hover: 0 14px 28px rgba(0,0,0,0.25);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 10px;
+        }
+
+        .dark-theme {
+            --primary: #1a1a2e;
+            --primary-light: #16213e;
+            --secondary: #0f3460;
+            --light: #1e1e2f;
+            --dark: #f0f0f0;
+            --white: #2a2a3a;
+            --gray: #c0c0c0;
+            background: var(--primary);
+            color: var(--dark);
+        }
+        
+        .dark-theme .stat-card,
+        .dark-theme .service-card,
+        .dark-theme .calendar-section,
+        .dark-theme .appointments-panel,
+        .dark-theme .profile-section,
+        .dark-theme .admin-section,
+        .dark-theme .contacts-section,
+        .dark-theme .map-container,
+        .dark-theme .news-item,
+        .dark-theme .modal-content,
+        .dark-theme .database-table,
+        .dark-theme .admin-table,
+        .dark-theme .info-card,
+        .dark-theme .contact-item {
+            background: var(--white);
+            color: var(--dark);
+        }
+        
+        .dark-theme .stat-number,
+        .dark-theme h1, .dark-theme h2, .dark-theme h3, .dark-theme h4,
+        .dark-theme .info-value,
+        .dark-theme .day-number,
+        .dark-theme .service-card h3,
+        .dark-theme .service-card .price,
+        .dark-theme .stat-label,
+        .dark-theme .info-label,
+        .dark-theme .contact-label,
+        .dark-theme .news-date,
+        .dark-theme .schedule-day,
+        .dark-theme .schedule-time,
+        .dark-theme .dropdown-menu li,
+        .dark-theme .admin-stat-card div,
+        .dark-theme .admin-stat-number,
+        .dark-theme .appointment-card .date,
+        .dark-theme .appointment-card .client,
+        .dark-theme .appointment-card .service,
+        .dark-theme .database-table td,
+        .dark-theme .admin-table td {
+            color: var(--dark) !important;
+        }
+        
+        .dark-theme .dropdown-menu {
+            background: var(--white);
+        }
+        
+        .dark-theme input,
+        .dark-theme select,
+        .dark-theme textarea {
+            background: var(--light);
+            color: var(--dark);
+            border-color: var(--secondary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .profile-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .profile-btn i {
+            font-size: 1.2rem;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .profile-dropdown.active {
+            display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        .dropdown-header {
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .dropdown-header h4 {
+            margin-bottom: 5px;
+        }
+
+        .dropdown-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .dropdown-menu {
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        .dropdown-menu li {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--dark);
+        }
+
+        .dropdown-menu li:hover {
+            background: var(--light);
+            color: var(--accent);
+        }
+
+        .dropdown-menu li i {
+            width: 20px;
+            color: var(--accent);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #dee2e6;
+            margin: 10px 0;
+        }
+
+        nav {
+            background-color: var(--secondary);
+            padding: 0.5rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a i {
+            margin-right: 5px;
+        }
+
+        nav ul li a.active {
+            background-color: var(--accent);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1557597774-9d2736059fa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 6rem 1rem;
+            margin-bottom: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+
+        .dashboard {
+            margin-bottom: 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+
+        .service-card .features {
+            list-style: none;
+            margin: 1rem 0;
+            flex-grow: 1;
+        }
+
+        .service-card .features li {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-card .features li i {
+            font-size: 1rem;
+            color: var(--success);
+            flex-shrink: 0;
+            width: 20px;
+        }
+
+        /* НОВЫЙ СТИЛЬ ДЛЯ ВЫПАДАЮЩЕГО МЕНЮ С ТЕКСТОМ */
+        .service-details-dropdown {
+            margin: 10px 0 15px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .dropdown-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .dropdown-detail-header:hover {
+            color: var(--accent);
+        }
+        .dropdown-detail-header i {
+            font-size: 0.8rem;
+            margin: 0;
+            color: var(--accent);
+        }
+        .dropdown-detail-content {
+            display: none;
+            padding: 0 0 12px 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--gray);
+            text-align: left;
+        }
+        .dropdown-detail-content p {
+            margin-bottom: 8px;
+        }
+        .dropdown-detail-content ul {
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+        .dropdown-detail-content li {
+            margin: 3px 0;
+        }
+        .dark-theme .service-details-dropdown {
+            border-color: rgba(255,255,255,0.1);
+        }
+        .dark-theme .dropdown-detail-content {
+            color: #ccc;
+        }
+
+        .database-section {
+            margin: 3rem 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .database-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            min-width: 600px;
+        }
+
+        .database-table caption {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: left;
+            color: var(--primary);
+            padding: 1rem;
+        }
+
+        .database-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            font-weight: 600;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+
+        .database-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .database-table tbody tr {
+            transition: var(--transition);
+        }
+
+        .database-table tbody tr:hover {
+            background-color: rgba(0,0,0,0.02);
+            transform: scale(1.01);
+        }
+
+        .table-filter {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .table-filter input {
+            padding: 10px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 25px;
+            flex: 1;
+            transition: var(--transition);
+        }
+
+        .table-filter input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(232, 73, 29, 0.1);
+        }
+
+        .booking-section {
+            margin: 3rem 0;
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .booking-header h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .booking-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .booking-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+        }
+
+        .calendar-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .view-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .view-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .weekday {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary);
+            padding: 10px;
+            background: var(--light);
+            border-radius: 5px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-day {
+            background: var(--light);
+            border-radius: 5px;
+            padding: 10px;
+            min-height: 100px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .calendar-day:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .calendar-day.today {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .calendar-day.today .day-number {
+            color: white;
+        }
+
+        .calendar-day.has-appointment {
+            background: #e8f4fd;
+            border-color: var(--primary);
+        }
+
+        .calendar-day.has-appointment .appointment-indicator {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .day-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .appointment-preview {
+            font-size: 0.8rem;
+            background: var(--white);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-top: 5px;
+            color: var(--dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .appointments-panel {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .appointments-panel h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .appointments-panel h3 i {
+            color: var(--accent);
+        }
+
+        .appointments-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .appointment-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .appointment-card:hover {
+            transform: translateX(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .appointment-card .date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .appointment-card .time {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .appointment-card .client {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .appointment-card .service {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .appointment-card .actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .appointment-card:hover .actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .edit-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .map-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            box-shadow: var(--shadow-md);
+            margin: 3rem 0;
+        }
+
+        .map-container h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #map {
+            height: 500px;
+            border-radius: calc(var(--border-radius) - 5px);
+            width: 100%;
+            background: #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-placeholder {
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--danger);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(232, 73, 29, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-direction: row;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+        }
+
+        .auth-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .auth-links a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .profile-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin: 3rem 0;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header h2 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .info-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--gray);
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .admin-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin: 3rem 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .admin-stat-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .admin-stat-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 1rem;
+        }
+
+        .admin-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .admin-tab:hover {
+            background: var(--light);
+        }
+
+        .admin-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th {
+            background: var(--light);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .admin-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .admin-table tr:hover {
+            background: var(--light);
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .badge-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .badge-info {
+            background: var(--info);
+            color: white;
+        }
+
+        .news {
+            margin: 3rem 0;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .news-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .news-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .news-category {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--light);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-content {
+            margin-bottom: 1rem;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .contacts-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin: 3rem 0;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-info {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-item .contact-details {
+            flex: 1;
+        }
+
+        .contact-item .contact-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .contact-item .contact-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .working-hours {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .working-hours h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-day {
+            font-weight: 600;
+        }
+
+        .schedule-time {
+            color: var(--accent);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .footer-newsletter {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .footer-newsletter input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .footer-newsletter button {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .footer-newsletter button:hover {
+            background: var(--accent-hover);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .theme-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .theme-switch button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .theme-switch button:hover {
+            transform: scale(1.1);
+            background: var(--accent);
+        }
+
+        .notification {
+            display: none !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .time-slot {
+            background: var(--light);
+            border: 2px solid var(--primary);
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .time-slot:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .time-slot.selected {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .time-slot.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: var(--gray);
+            border-color: var(--gray);
+        }
+
+        .time-slot.disabled:hover {
+            background: var(--gray);
+            color: var(--dark);
+        }
+
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            padding: 8px 12px;
+            justify-content: space-around;
+            z-index: 1000;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .mobile-bottom-nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 0.7rem;
+            padding: 5px 8px;
+            border-radius: 8px;
+        }
+
+        .mobile-bottom-nav a i {
+            font-size: 1.2rem;
+        }
+
+        .mobile-bottom-nav a.active {
+            background: var(--accent);
+        }
+
+        @media (max-width: 1024px) {
+            .booking-content {
+                grid-template-columns: 1fr;
+            }
+            .logo {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-bottom-nav {
+                display: flex;
+            }
+            
+            body {
+                padding-bottom: 70px;
+            }
+
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            nav ul li a {
+                font-size: 1.2rem;
+                padding: 10px 25px;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .weekdays {
+                font-size: 0.9rem;
+            }
+            
+            .calendar-day {
+                min-height: 80px;
+                padding: 5px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            #map {
+                height: 300px;
+            }
+
+            .profile-info {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .btn {
+                padding: 12px 20px;
+            }
+        }
+
+        .user-is-tabbing *:focus {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .loader {
+            border: 3px solid var(--light);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .submit-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .footer-section .social-icons {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-btn" aria-label="Меню">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="mobile-bottom-nav">
+        <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i><span>О нас</span></a>
+        <a href="#services" class="nav-link"><i class="fas fa-shield-alt"></i><span>Услуги</span></a>
+        <a href="#booking" class="nav-link"><i class="fas fa-calendar-check"></i><span>Запись</span></a>
+        <a href="#news" class="nav-link"><i class="fas fa-newspaper"></i><span>Новости</span></a>
+        <a href="#contacts" class="nav-link"><i class="fas fa-map-marker-alt"></i><span>Контакты</span></a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-left">
+                <!-- Убрана проблема с изображением - используем эмодзи вместо отсутствующего файла -->
+                <div style="width:60px; height:60px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-right:15px;"><i class="fas fa-shield-alt" style="font-size:2rem;"></i></div>
+                <div class="logo-text">
+                    <h1>Отдел вневедомственной охраны</h1>
+                    <p>Обеспечение безопасности объектов и граждан</p>
+                </div>
+            </div>
+            <div class="profile-menu">
+                <div class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="profileBtnText">Войти</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <h4 id="dropdownUserName">Гость</h4>
+                        <p id="dropdownUserRole">Не авторизован</p>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li id="loginMenuItem"><i class="fas fa-sign-in-alt"></i> Вход</li>
+                        <li id="registerMenuItem"><i class="fas fa-user-plus"></i> Регистрация</li>
+                        <li class="dropdown-divider" id="authDivider"></li>
+                        <li id="profileMenuItem" style="display: none;"><i class="fas fa-user"></i> Личный кабинет</li>
+                        <li id="adminMenuItem" style="display: none;"><i class="fas fa-cog"></i> Админ-панель</li>
+                        <li id="myAppointmentsMenuItem" style="display: none;"><i class="fas fa-calendar-check"></i> Мои записи</li>
+                        <li class="dropdown-divider" id="profileDivider" style="display: none;"></li>
+                        <li id="logoutMenuItem" style="display: none;"><i class="fas fa-sign-out-alt"></i> Выход</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav aria-label="Основная навигация">
+        <ul>
+            <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> О нас</a></li>
+            <li><a href="#services" class="nav-link"><i class="fas fa-shield-alt"></i> Услуги</a></li>
+            <li><a href="#booking" class="nav-link"><i class="fas fa-calendar-check"></i> Запись</a></li>
+            <li><a href="#news" class="nav-link"><i class="fas fa-newspaper"></i> Новости</a></li>
+            <li><a href="#contacts" class="nav-link"><i class="fas fa-map-marker-alt"></i> Контакты</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section class="hero fadeInUp" id="about">
+            <h2>Профессиональная охрана объектов любой сложности</h2>
+            <p>ОВО по г. Братску филиала — ФГКУ "УВО ВНГ России по Иркутской области" — обеспечение безопасности и защита граждан, имущества и общественного порядка на территории города.</p>
+            <a href="#booking" class="btn"><i class="fas fa-calendar-check"></i> Записаться на консультацию</a>
+            <a href="#contacts" class="btn btn-outline"><i class="fas fa-phone"></i> Связаться с нами</a>
+        </section>
+
+        <section class="dashboard">
+            <div class="stats-grid">
+                <div class="stat-card"><i class="fas fa-shield-alt"></i><div class="stat-number" id="activeObjects">127</div><div class="stat-label">Объектов под охраной</div></div>
+                <div class="stat-card"><i class="fas fa-users"></i><div class="stat-number" id="activeStaff">45</div><div class="stat-label">Сотрудников на смене</div></div>
+                <div class="stat-card"><i class="fas fa-clock"></i><div class="stat-number" id="responseTime">3.5</div><div class="stat-label">Среднее время реагирования (мин)</div></div>
+            </div>
+        </section>
+        
+        <section id="services">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);"><i class="fas fa-cogs"></i> Наши услуги</h2>
+            <div class="services">
+                <div class="service-card"><i class="fas fa-building"></i><h3>Охрана объектов</h3><div class="price">от 50 000 ₽/мес</div><ul class="features"><li><i class="fas fa-check"></i> Круглосуточный мониторинг</li><li><i class="fas fa-check"></i> Группа быстрого реагирования</li><li><i class="fas fa-check"></i> Техническое обслуживание</li></ul>
+                <div class="service-details-dropdown"><div class="dropdown-detail-header" onclick="toggleDropdown(this)">Подробнее об услуге <i class="fas fa-chevron-down"></i></div><div class="dropdown-detail-content"><p>Комплексная охрана объектов любой сложности включает в себя физическую охрану периметра и территории, контроль доступа, патрулирование, а также экстренное реагирование на сигналы тревоги. Наши сотрудники — аттестованные специалисты с опытом работы в силовых структурах. Подходит для торговых центров, бизнес-центров, складов, производственных предприятий и частных владений.</p></div></div>
+                <button class="btn btn-sm" onclick="openBooking('Охрана объектов')">Заказать</button></div>
+                
+                <div class="service-card"><i class="fas fa-bell"></i><h3>Тревожная кнопка</h3><div class="price">от 5 000 ₽/мес</div><ul class="features"><li><i class="fas fa-check"></i> Мгновенный вызов</li><li><i class="fas fa-check"></i> Прибытие за 5-7 минут</li><li><i class="fas fa-check"></i> Круглосуточная поддержка</li></ul>
+                <div class="service-details-dropdown"><div class="dropdown-detail-header" onclick="toggleDropdown(this)">Подробнее об услуге <i class="fas fa-chevron-down"></i></div><div class="dropdown-detail-content"><p>Экстренный канал связи с группой быстрого реагирования. При нажатии тревожной кнопки сигнал мгновенно поступает на центральный пульт, и ближайший наряд выезжает на объект. Время прибытия — не более 7 минут. Устанавливается как стационарно, так и в мобильном варианте (GSM-кнопка). Идеально для аптек, ювелирных салонов, банков, АЗС и малого бизнеса.</p></div></div>
+                <button class="btn btn-sm" onclick="openBooking('Тревожная кнопка')">Заказать</button></div>
+                
+                <div class="service-card"><i class="fas fa-desktop"></i><h3>Пультовая охрана</h3><div class="price">от 15 000 ₽/мес</div><ul class="features"><li><i class="fas fa-check"></i> GSM/GPRS мониторинг</li><li><i class="fas fa-check"></i> Видеоподтверждение</li><li><i class="fas fa-check"></i> Резервное копирование</li></ul>
+                <div class="service-details-dropdown"><div class="dropdown-detail-header" onclick="toggleDropdown(this)">Подробнее об услуге <i class="fas fa-chevron-down"></i></div><div class="dropdown-detail-content"><p>Удалённая охрана объектов через цифровые каналы связи. Система мониторинга получает сигналы с датчиков движения, открытия дверей, разбития стекла. При срабатывании на пульт выводится видео с камер для подтверждения угрозы. Включает установку оборудования, абонентское обслуживание и выезд ГБР. Подходит для офисов, магазинов, складских помещений и коттеджных посёлков.</p></div></div>
+                <button class="btn btn-sm" onclick="openBooking('Пультовая охрана')">Заказать</button></div>
+                
+                <div class="service-card"><i class="fas fa-user-shield"></i><h3>Личная охрана</h3><div class="price">от 100 000 ₽/мес</div><ul class="features"><li><i class="fas fa-check"></i> Профессиональные телохранители</li><li><i class="fas fa-check"></i> Сопровождение</li><li><i class="fas fa-check"></i> Анализ угроз</li></ul>
+                <div class="service-details-dropdown"><div class="dropdown-detail-header" onclick="toggleDropdown(this)">Подробнее об услуге <i class="fas fa-chevron-down"></i></div><div class="dropdown-detail-content"><p>Обеспечение личной безопасности граждан. Опытные телохранители с навыками тактической медицины и рукопашного боя сопровождают вас при поездках, деловых встречах и в повседневной жизни. Проводится предварительная оценка рисков и разработка маршрутов. Возможно сочетание с охраной жилья и автомобиля.</p></div></div>
+                <button class="btn btn-sm" onclick="openBooking('Личная охрана')">Заказать</button></div>
+                
+                <div class="service-card"><i class="fas fa-chart-line"></i><h3>Консультации</h3><div class="price">от 3 000 ₽/час</div><ul class="features"><li><i class="fas fa-check"></i> Аудит безопасности</li><li><i class="fas fa-check"></i> Разработка системы</li><li><i class="fas fa-check"></i> Обучение персонала</li></ul>
+                <div class="service-details-dropdown"><div class="dropdown-detail-header" onclick="toggleDropdown(this)">Подробнее об услуге <i class="fas fa-chevron-down"></i></div><div class="dropdown-detail-content"><p>Профессиональный аудит существующей системы безопасности вашего объекта. Специалисты выявляют уязвимости, разрабатывают концепцию защиты, помогают с выбором оборудования и документацией. Проводим обучение сотрудников действиям при ЧС и правилам пользования охранными системами.</p></div></div>
+                <button class="btn btn-sm" onclick="openBooking('Консультации')">Заказать</button></div>
+                
+                <div class="service-card"><i class="fas fa-video"></i><h3>Монтаж систем</h3><div class="price">от 30 000 ₽</div><ul class="features"><li><i class="fas fa-check"></i> Видеонаблюдение</li><li><i class="fas fa-check"></i> Контроль доступа</li><li><i class="fas fa-check"></i> Сигнализация</li></ul>
+                <div class="service-details-dropdown"><div class="dropdown-detail-header" onclick="toggleDropdown(this)">Подробнее об услуге <i class="fas fa-chevron-down"></i></div><div class="dropdown-detail-content"><p>Установка современных охранных систем под ключ. Проектирование, поставка оборудования, монтаж, пусконаладка и последующее сервисное обслуживание. Работаем с IP-камерами, домофонами, турникетами, датчиками движения, пожарными извещателями. Гарантия на оборудование до 3 лет.</p></div></div>
+                <button class="btn btn-sm" onclick="openBooking('Монтаж систем')">Заказать</button></div>
+            </div>
+        </section>
+
+        <!-- БАЗА ДАННЫХ - ВИДНА ТОЛЬКО АДМИНИСТРАТОРУ -->
+        <section id="database" class="database-section" style="display: none;">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);"><i class="fas fa-database"></i> База данных (Админ-панель)</h2>
+            <div class="table-filter"><input type="text" id="tableSearch" placeholder="🔍 Поиск по всем таблицам..." onkeyup="filterAllTables(this.value)"></div>
+            <div class="table-container">
+                <table class="database-table" id="objectsTable">
+                    <caption>Охраняемые объекты</caption>
+                    <thead><tr><th>ID</th><th>Название</th><th>Адрес</th><th>Тип объекта</th><th>Дата подключения</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody id="objectsTableBody"></tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <table class="database-table" id="employeesTable">
+                    <caption>Сотрудники</caption>
+                    <thead><tr><th>Табельный номер</th><th>ФИО</th><th>Должность</th><th>Звание</th><th>Подразделение</th><th>Дата приема</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody id="employeesTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- КАРТА - ВИДНА ТОЛЬКО АДМИНИСТРАТОРУ (заглушка без API) -->
+        <section id="map-section" class="map-container" style="display: none;">
+            <h3><i class="fas fa-map-marked-alt"></i> Карта охраняемых объектов</h3>
+            <div id="map">
+                <div class="map-placeholder">
+                    <i class="fas fa-map" style="font-size:3rem;"></i>
+                    <p>Для отображения карты требуется API ключ Яндекс.Карт</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking-section">
+            <div class="booking-header"><h2><i class="fas fa-calendar-check"></i> Запись на консультацию</h2><p>Выберите удобное время для консультации со специалистом отдела вневедомственной охраны</p></div>
+            <div class="booking-content">
+                <div class="calendar-section">
+                    <div class="calendar-header"><h3 id="currentMonth">Июнь 2026</h3><div class="view-controls"><button class="view-btn" onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button><button class="view-btn" onclick="goToToday()">Сегодня</button><button class="view-btn" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button></div></div>
+                    <div class="weekdays"><div class="weekday">ВС</div><div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div></div>
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                    <div style="display: flex; gap: 20px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #dee2e6;"><div style="display: flex; align-items: center; gap: 5px;"><div style="width: 20px; height: 20px; background: #e8f4fd; border: 2px solid var(--primary); border-radius: 3px;"></div><span>Есть записи</span></div><div style="display: flex; align-items: center; gap: 5px;"><div style="width: 20px; height: 20px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 3px;"></div><span>Сегодня</span></div></div>
+                </div>
+                <div class="appointments-panel">
+                    <h3><i class="fas fa-list"></i> Записи на консультацию</h3>
+                    <div class="appointments-list" id="appointmentsList"></div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #dee2e6;"><div style="text-align: center;"><div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);" id="totalAppointments">0</div><div style="color: var(--gray); font-size: 0.9rem;">Всего записей</div></div><div style="text-align: center;"><div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);" id="todayAppointments">0</div><div style="color: var(--gray); font-size: 0.9rem;">На сегодня</div></div><div style="text-align: center;"><div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);" id="upcomingAppointments">0</div><div style="color: var(--gray); font-size: 0.9rem;">Предстоящих</div></div></div>
+                    <button class="submit-btn" onclick="checkAuthAndBook()" style="margin-top: 20px;"><i class="fas fa-plus"></i> Новая запись</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="profile" class="profile-section" style="display: none;">
+            <div class="profile-header"><h2><i class="fas fa-user-circle"></i> Личный кабинет</h2><span class="badge badge-info" id="profileBadge">Клиент</span></div>
+            <div style="display: flex; justify-content: center;"><div class="profile-avatar"><i class="fas fa-user"></i></div></div>
+            <div class="profile-info"><div class="info-card"><h4><i class="fas fa-id-card"></i> Личные данные</h4><div class="info-row"><span class="info-label">ФИО:</span><span class="info-value" id="profileFullName">Иванов Иван Иванович</span></div><div class="info-row"><span class="info-label">Email:</span><span class="info-value" id="profileEmail">ivan@mail.ru</span></div><div class="info-row"><span class="info-label">Телефон:</span><span class="info-value" id="profilePhone">+7 (999) 123-45-67</span></div><div class="info-row"><span class="info-label">Дата регистрации:</span><span class="info-value" id="profileRegDate">01.01.2026</span></div></div><div class="info-card"><h4><i class="fas fa-chart-line"></i> Статистика</h4><div class="info-row"><span class="info-label">Всего записей:</span><span class="info-value" id="profileTotalBookings">5</span></div><div class="info-row"><span class="info-label">Активных:</span><span class="info-value" id="profileActiveBookings">2</span></div><div class="info-row"><span class="info-label">Завершенных:</span><span class="info-value" id="profileCompletedBookings">3</span></div></div></div>
+            <h4 style="margin: 2rem 0 1rem;"><i class="fas fa-calendar-check"></i> Мои записи</h4>
+            <div class="appointments-list" id="myAppointmentsList"></div>
+        </section>
+
+        <section id="admin" class="admin-section" style="display: none;">
+            <div class="admin-header"><h2><i class="fas fa-cog"></i> Админ-панель</h2><span class="badge badge-danger">Администратор</span></div>
+            <div class="admin-stats"><div class="admin-stat-card"><i class="fas fa-users"></i><div class="admin-stat-number" id="totalUsers">156</div><div>Пользователей</div></div><div class="admin-stat-card"><i class="fas fa-calendar-check"></i><div class="admin-stat-number" id="totalBookings">89</div><div>Записей</div></div><div class="admin-stat-card"><i class="fas fa-building"></i><div class="admin-stat-number" id="totalObjects">45</div><div>Объектов</div></div><div class="admin-stat-card"><i class="fas fa-user-shield"></i><div class="admin-stat-number" id="totalStaff">32</div><div>Сотрудников</div></div></div>
+            <div class="admin-tabs"><div class="admin-tab active" onclick="switchAdminTab('users')">Пользователи</div><div class="admin-tab" onclick="switchAdminTab('bookings')">Записи</div><div class="admin-tab" onclick="switchAdminTab('staff')">Сотрудники</div></div>
+            <div id="adminUsers" class="admin-panel active"><h3>Управление пользователями</h3><div class="table-container"><table class="admin-table"><thead><tr><th>ID</th><th>ФИО</th><th>Email</th><th>Телефон</th><th>Роль</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="usersTableBody"></tbody></table></div></div>
+            <div id="adminBookings" class="admin-panel"><h3>Управление записями</h3><div class="table-container"><table class="admin-table"><thead><tr><th>ID</th><th>Клиент</th><th>Дата</th><th>Время</th><th>Услуга</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="bookingsTableBody"></tbody></table></div></div>
+            <div id="adminStaff" class="admin-panel"><h3>Управление сотрудниками</h3><div class="table-container"><table class="admin-table"><thead><tr><th>Табельный номер</th><th>ФИО</th><th>Должность</th><th>Звание</th><th>Подразделение</th><th>Дата приема</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="adminStaffTableBody"></tbody></table></div></div>
+        </section>
+
+        <section class="news" id="news">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);"><i class="fas fa-newspaper"></i> Новости и события</h2>
+            <div class="news-grid">
+                <div class="news-item" onclick="window.open('news-1.html', '_blank')"><span class="news-category">Новости</span><h3>Внедрение новой системы мониторинга</h3><p class="news-date"><i class="far fa-calendar-alt"></i> 10 июня 2026</p><p class="news-content">Наш отдел внедрил современную систему цифрового мониторинга охраняемых объектов, что позволило повысить скорость реагирования на 30%.</p><div class="news-footer"><span>Просмотров: 234</span><span class="read-more"><i class="fas fa-arrow-right"></i></span></div></div>
+                <div class="news-item" onclick="window.open('news-2.html', '_blank')"><span class="news-category">Обучение</span><h3>Тренинг по противодействию терроризму</h3><p class="news-date"><i class="far fa-calendar-alt"></i> 11 июня 2026</p><p class="news-content">Сотрудники отдела прошли специальный тренинг по выявлению и предотвращению террористических угроз на охраняемых объектах.</p><div class="news-footer"><span>Просмотров: 156</span><span class="read-more"><i class="fas fa-arrow-right"></i></span></div></div>
+                <div class="news-item" onclick="window.open('news-3.html', '_blank')"><span class="news-category">Акция</span><h3>Скидка 20% на монтаж систем</h3><p class="news-date"><i class="far fa-calendar-alt"></i> 5 июня 2026</p><p class="news-content">При заключении договора на годовое обслуживание - скидка 20% на установку охранных систем.</p><div class="news-footer"><span>Просмотров: 89</span><span class="read-more"><i class="fas fa-arrow-right"></i></span></div></div>
+                <div class="news-item" onclick="window.open('news-4.html', '_blank')"><span class="news-category">Событие</span><h3>День открытых дверей</h3><p class="news-date"><i class="far fa-calendar-alt"></i> 1 июня 2026</p><p class="news-content">Приглашаем всех желающих на день открытых дверей. Вы сможете увидеть работу центра мониторинга.</p><div class="news-footer"><span>Просмотров: 67</span><span class="read-more"><i class="fas fa-arrow-right"></i></span></div></div>
+            </div>
+        </section>
+        
+        <section id="contacts" class="contacts-section">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);"><i class="fas fa-address-card"></i> Контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div class="contact-details"><div class="contact-label">Адрес</div><div class="contact-value">г. Братск, ул. Янгеля 4а</div></div></div>
+                    <div class="contact-item"><i class="fas fa-phone"></i><div class="contact-details"><div class="contact-label">Телефон</div><div class="contact-value">+7 (3953) 41-42-42</div></div></div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i><div class="contact-details"><div class="contact-label">Email</div><div class="contact-value">ohrana38@mail.ru</div></div></div>
+                </div>
+                <div class="working-hours">
+                    <h4><i class="fas fa-clock"></i> Режим работы</h4>
+                    <div class="schedule-item"><span class="schedule-day">Понедельник - Пятница</span><span class="schedule-time">09:00 - 18:00</span></div>
+                    <div class="schedule-item"><span class="schedule-day">Суббота</span><span class="schedule-time">10:00 - 16:00</span></div>
+                    <div class="schedule-item"><span class="schedule-day">Воскресенье</span><span class="schedule-time">Выходной</span></div>
+                    <div class="schedule-item"><span class="schedule-day">Дежурная часть</span><span class="schedule-time">Круглосуточно</span></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section"><h3><i class="fas fa-info-circle"></i> О нас</h3><p>Отдел вневедомственной охраны - профессиональная организация, обеспечивающая безопасность с 2012 года.</p></div>
+            <div class="footer-section"><h3><i class="fas fa-address-book"></i> Контакты</h3><p><i class="fas fa-map-marker-alt"></i> г. Братск, ул. Янгеля 4а</p><p><i class="fas fa-phone"></i> +7 (3953) 41-42-42</p><p><i class="fas fa-envelope"></i> ohrana38@mail.ru</p></div>
+            <div class="footer-section">
+                <h3><i class="fas fa-link"></i> Быстрые ссылки</h3>
+                <a href="#about"><i class="fas fa-chevron-right"></i> О нас</a>
+                <a href="#services"><i class="fas fa-chevron-right"></i> Услуги</a>
+                <a href="#booking"><i class="fas fa-chevron-right"></i> Запись</a>
+                <a href="#news"><i class="fas fa-chevron-right"></i> Новости</a>
+                <a href="#contacts"><i class="fas fa-chevron-right"></i> Контакты</a>
+            </div>
+            <div class="footer-section"><h3><i class="fas fa-newspaper"></i> Подписка</h3><p>Получайте новости и спецпредложения</p><div class="footer-newsletter"><input type="email" placeholder="Ваш email" id="newsletterEmail"><button onclick="subscribeNewsletter()"><i class="fas fa-paper-plane"></i></button></div></div>
+        </div>
+        <div class="copyright"><p>&copy; 2026 Отдел вневедомственной охраны. Все права защищены.</p></div>
+    </footer>
+
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 id="authModalTitle">Вход в личный кабинет</h3><button class="close-btn" onclick="closeAuthModal()"><i class="fas fa-times"></i></button></div>
+            <div id="loginForm" class="auth-form">
+                <div class="form-group"><label for="loginEmail"><i class="fas fa-envelope"></i> Email:</label><input type="email" id="loginEmail" placeholder="example@mail.ru"></div>
+                <div class="form-group"><label for="loginPassword"><i class="fas fa-lock"></i> Пароль:</label><input type="password" id="loginPassword" placeholder="Введите пароль"></div>
+                <div class="checkbox-group"><input type="checkbox" id="rememberMe"><label for="rememberMe">Запомнить меня</label></div>
+                <div class="auth-links"><a href="#" onclick="showRegisterForm()">Регистрация</a></div>
+                <button class="submit-btn" onclick="login()">Войти</button>
+            </div>
+            <div id="registerForm" class="auth-form" style="display: none;">
+                <div class="form-group"><label for="regFullName"><i class="fas fa-user"></i> ФИО:</label><input type="text" id="regFullName" placeholder="Иванов Иван Иванович"></div>
+                <div class="form-group"><label for="regEmail"><i class="fas fa-envelope"></i> Email:</label><input type="email" id="regEmail" placeholder="example@mail.ru"></div>
+                <div class="form-group"><label for="regPhone"><i class="fas fa-phone"></i> Телефон:</label><input type="tel" id="regPhone" placeholder="+7 (999) 123-45-67"></div>
+                <div class="form-group"><label for="regPassword"><i class="fas fa-lock"></i> Пароль:</label><input type="password" id="regPassword" placeholder="Придумайте пароль"></div>
+                <div class="form-group"><label for="regPasswordConfirm"><i class="fas fa-lock"></i> Подтверждение:</label><input type="password" id="regPasswordConfirm" placeholder="Повторите пароль"></div>
+                <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">Согласен с <a href="#">условиями использования</a></label></div>
+                <div class="auth-links"><a href="#" onclick="showLoginForm()">Уже есть аккаунт?</a></div>
+                <button class="submit-btn" onclick="register()">Зарегистрироваться</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="appointmentModal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 id="modalTitle">Новая запись на консультацию</h3><button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button></div>
+            <form class="appointment-form" id="appointmentForm" onsubmit="return saveAppointment(event)">
+                <input type="hidden" id="appointmentId" value="">
+                <div class="form-group"><label for="clientName"><i class="fas fa-user"></i> Ваше имя:</label><input type="text" id="clientName" required placeholder="Введите ваше имя"></div>
+                <div class="form-group"><label for="clientPhone"><i class="fas fa-phone"></i> Телефон:</label><input type="tel" id="clientPhone" required placeholder="+7 (___) ___-__-__"></div>
+                <div class="form-group"><label for="clientEmail"><i class="fas fa-envelope"></i> Email:</label><input type="email" id="clientEmail" required placeholder="example@mail.ru"></div>
+                <div class="form-group"><label for="appointmentDate"><i class="fas fa-calendar"></i> Дата:</label><input type="date" id="appointmentDate" required></div>
+                <div class="form-group"><label><i class="fas fa-clock"></i> Время:</label><div class="time-slots" id="timeSlots"></div></div>
+                <div class="form-group"><label for="serviceType"><i class="fas fa-shield-alt"></i> Тип консультации:</label><select id="serviceType" required><option value="">Выберите тип консультации</option><option value="Охрана объектов">Охрана объектов</option><option value="Тревожная кнопка">Тревожная кнопка</option><option value="Пультовая охрана">Пультовая охрана</option><option value="Личная охрана">Личная охрана</option><option value="Монтаж систем">Монтаж систем</option><option value="Консультация по безопасности">Консультация по безопасности</option></select></div>
+                <div class="form-group"><label for="comments"><i class="fas fa-comment"></i> Комментарий:</label><textarea id="comments" rows="3" placeholder="Дополнительная информация..."></textarea></div>
+                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Сохранить запись</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 id="editModalTitle">Редактирование</h3><button class="close-btn" onclick="closeEditModal()"><i class="fas fa-times"></i></button></div>
+            <div id="editFormContent"></div>
+            <button class="submit-btn" id="saveEditBtn" onclick="saveEdit()" style="margin-top: 15px;">Сохранить изменения</button>
+        </div>
+    </div>
+
+    <div class="theme-switch"><button onclick="toggleTheme()" aria-label="Переключить тему"><i class="fas fa-moon"></i></button></div>
+
+    <script>
+        // Состояние приложения
+        let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let objects = JSON.parse(localStorage.getItem('objects')) || [];
+        let employees = JSON.parse(localStorage.getItem('employees')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+        const timeSlots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+        const rankOptions = ['Рядовой', 'Младший сержант', 'Сержант', 'Старший сержант', 'Старшина', 'Прапорщик', 'Старший прапорщик', 'Младший лейтенант', 'Лейтенант', 'Старший лейтенант', 'Капитан', 'Майор', 'Подполковник', 'Полковник'];
+
+        // Функция для переключения выпадающего меню
+        window.toggleDropdown = function(element) {
+            const content = element.parentElement.querySelector('.dropdown-detail-content');
+            const icon = element.querySelector('i');
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                content.style.display = 'block';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        };
+
+        function initializeTestData() {
+            if (users.length === 0) {
+                users = [{id:"1",fullName:"Администратор",email:"admin@mail.ru",phone:"+7 (999) 111-11-11",password:"admin123",role:"admin",registeredAt:new Date().toISOString()},{id:"2",fullName:"Иванов Иван Иванович",email:"ivan@mail.ru",phone:"+7 (999) 123-45-67",password:"client123",role:"client",registeredAt:new Date().toISOString()}];
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+            if (objects.length === 0) {
+                objects = [{id:"1001",name:"ТЦ \"Северный\"",address:"ул. Мира,15",type:"Торговый центр",date:"01.06.2026",status:"Активный"},{id:"1002",name:"Школа №45",address:"ул. Ленина,78",type:"Образовательное учреждение",date:"01.06.2026",status:"Активный"},{id:"1003",name:"Завод \"Металлист\"",address:"пр. Промышленный,12",type:"Промышленный объект",date:"01.06.2026",status:"Активный"},{id:"1004",name:"Аптека \"Здоровье\"",address:"ул. Центральная,33",type:"Аптека",date:"01.06.2026",status:"Активный"},{id:"1005",name:"Кафе \"Уют\"",address:"ул. Гагарина,7",type:"Общепит",date:"01.06.2026",status:"Неактивный"}];
+                localStorage.setItem('objects', JSON.stringify(objects));
+            }
+            if (employees.length === 0) {
+                employees = [{id:"2457",name:"Иванов Сергей Петрович",position:"Начальник смены",rank:"Майор",department:"Группа быстрого реагирования",date:"01.06.2026",status:"Работает"},{id:"3568",name:"Петрова Анна Владимировна",position:"Оператор пульта",rank:"Капитан",department:"Центр мониторинга",date:"01.06.2026",status:"Работает"},{id:"4123",name:"Сидоров Дмитрий Игоревич",position:"Охранник",rank:"Старшина",department:"Стационарный пост",date:"01.06.2026",status:"Работает"},{id:"2981",name:"Кузнецова Елена Александровна",position:"Техник",rank:"Прапорщик",department:"Технический отдел",date:"01.06.2026",status:"Работает"},{id:"3765",name:"Васильев Андрей Николаевич",position:"Водитель",rank:"Сержант",department:"Группа быстрого реагирования",date:"01.06.2026",status:"Уволен"}];
+                localStorage.setItem('employees', JSON.stringify(employees));
+            }
+        }
+
+        let currentEditItem = null;
+
+        function openEditModal(type, id) {
+            if (!currentUser || currentUser.role !== 'admin') { alert('Доступ только для администратора'); return; }
+            currentEditItem = { type, id };
+            let html = '';
+            if (type === 'user') {
+                let item = users.find(u => u.id === id);
+                if (item) html = `<div class="form-group"><label>ФИО</label><input type="text" id="edit_fullName" value="${item.fullName.replace(/"/g, '&quot;')}"></div><div class="form-group"><label>Email</label><input type="email" id="edit_email" value="${item.email}"></div><div class="form-group"><label>Телефон</label><input type="text" id="edit_phone" value="${item.phone}"></div><div class="form-group"><label>Роль</label><select id="edit_role"><option ${item.role === 'admin' ? 'selected' : ''} value="admin">Админ</option><option ${item.role === 'client' ? 'selected' : ''} value="client">Клиент</option></select></div>`;
+                document.getElementById('editModalTitle').textContent = 'Редактирование пользователя';
+            } else if (type === 'employee') {
+                let item = employees.find(e => e.id === id);
+                if (item) html = `<div class="form-group"><label>ФИО</label><input type="text" id="edit_name" value="${item.name.replace(/"/g, '&quot;')}"></div><div class="form-group"><label>Должность</label><input type="text" id="edit_position" value="${item.position}"></div><div class="form-group"><label>Звание</label><select id="edit_rank">${rankOptions.map(r => `<option ${item.rank === r ? 'selected' : ''} value="${r}">${r}</option>`).join('')}</select></div><div class="form-group"><label>Подразделение</label><input type="text" id="edit_department" value="${item.department}"></div><div class="form-group"><label>Дата приема</label><input type="text" id="edit_date" value="${item.date}"></div><div class="form-group"><label>Статус</label><select id="edit_status"><option ${item.status === 'Работает' ? 'selected' : ''} value="Работает">Работает</option><option ${item.status === 'Уволен' ? 'selected' : ''} value="Уволен">Уволен</option></select></div>`;
+                document.getElementById('editModalTitle').textContent = 'Редактирование сотрудника';
+            } else if (type === 'object') {
+                let item = objects.find(o => o.id === id);
+                if (item) html = `<div class="form-group"><label>Название</label><input type="text" id="edit_name" value="${item.name.replace(/"/g, '&quot;')}"></div><div class="form-group"><label>Адрес</label><input type="text" id="edit_address" value="${item.address}"></div><div class="form-group"><label>Тип объекта</label><input type="text" id="edit_type" value="${item.type}"></div><div class="form-group"><label>Дата подключения</label><input type="text" id="edit_date" value="${item.date}"></div><div class="form-group"><label>Статус</label><select id="edit_status"><option ${item.status === 'Активный' ? 'selected' : ''} value="Активный">Активный</option><option ${item.status === 'Неактивный' ? 'selected' : ''} value="Неактивный">Неактивный</option></select></div>`;
+                document.getElementById('editModalTitle').textContent = 'Редактирование объекта';
+            } else if (type === 'booking') {
+                let item = appointments.find(a => a.id === id);
+                if (item) html = `<div class="form-group"><label>Клиент</label><input type="text" id="edit_clientName" value="${item.clientName.replace(/"/g, '&quot;')}"></div><div class="form-group"><label>Телефон</label><input type="text" id="edit_clientPhone" value="${item.clientPhone}"></div><div class="form-group"><label>Email</label><input type="email" id="edit_clientEmail" value="${item.clientEmail}"></div><div class="form-group"><label>Дата</label><input type="date" id="edit_date" value="${item.date}"></div><div class="form-group"><label>Время</label><select id="edit_time">${timeSlots.map(t => `<option ${item.time === t ? 'selected' : ''} value="${t}">${t}</option>`).join('')}</select></div><div class="form-group"><label>Услуга</label><input type="text" id="edit_serviceType" value="${item.serviceType}"></div>`;
+                document.getElementById('editModalTitle').textContent = 'Редактирование записи';
+            }
+            if (html) { document.getElementById('editFormContent').innerHTML = html; document.getElementById('editModal').classList.add('active'); }
+        }
+
+        function saveEdit() {
+            if (!currentEditItem) return;
+            const { type, id } = currentEditItem;
+            if (type === 'user') {
+                let idx = users.findIndex(u => u.id === id);
+                if (idx !== -1) { users[idx].fullName = document.getElementById('edit_fullName').value; users[idx].email = document.getElementById('edit_email').value; users[idx].phone = document.getElementById('edit_phone').value; users[idx].role = document.getElementById('edit_role').value; localStorage.setItem('users', JSON.stringify(users)); if (currentUser && currentUser.id === id) { currentUser = users[idx]; localStorage.setItem('currentUser', JSON.stringify(currentUser)); updateUIForUser(); } renderUsersTable(); alert('Пользователь обновлён'); }
+            } else if (type === 'employee') {
+                let idx = employees.findIndex(e => e.id === id);
+                if (idx !== -1) { employees[idx].name = document.getElementById('edit_name').value; employees[idx].position = document.getElementById('edit_position').value; employees[idx].rank = document.getElementById('edit_rank').value; employees[idx].department = document.getElementById('edit_department').value; employees[idx].date = document.getElementById('edit_date').value; employees[idx].status = document.getElementById('edit_status').value; localStorage.setItem('employees', JSON.stringify(employees)); renderEmployeesTable(); renderAdminStaffTable(); alert('Сотрудник обновлён'); }
+            } else if (type === 'object') {
+                let idx = objects.findIndex(o => o.id === id);
+                if (idx !== -1) { objects[idx].name = document.getElementById('edit_name').value; objects[idx].address = document.getElementById('edit_address').value; objects[idx].type = document.getElementById('edit_type').value; objects[idx].date = document.getElementById('edit_date').value; objects[idx].status = document.getElementById('edit_status').value; localStorage.setItem('objects', JSON.stringify(objects)); renderObjectsTable(); alert('Объект обновлён'); }
+            } else if (type === 'booking') {
+                let idx = appointments.findIndex(a => a.id === id);
+                if (idx !== -1) { appointments[idx].clientName = document.getElementById('edit_clientName').value; appointments[idx].clientPhone = document.getElementById('edit_clientPhone').value; appointments[idx].clientEmail = document.getElementById('edit_clientEmail').value; appointments[idx].date = document.getElementById('edit_date').value; appointments[idx].time = document.getElementById('edit_time').value; appointments[idx].serviceType = document.getElementById('edit_serviceType').value; localStorage.setItem('appointments', JSON.stringify(appointments)); renderBookingsTable(); renderCalendar(); renderAppointmentsList(); alert('Запись обновлена'); }
+            }
+            closeEditModal();
+        }
+
+        function closeEditModal() { document.getElementById('editModal').classList.remove('active'); currentEditItem = null; }
+
+        function renderUsersTable() {
+            const tbody = document.getElementById('usersTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.fullName}</td>
+                    <td>${user.email}</td>
+                    <td>${user.phone}</td>
+                    <td><span class="badge ${user.role === 'admin' ? 'badge-danger' : 'badge-info'}">${user.role === 'admin' ? 'Админ' : 'Клиент'}</span></td>
+                    <td><span class="badge badge-success">Активен</span></td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="openEditModal('user', '${user.id}')" title="Редактировать"><i class="fas fa-edit"></i></button>
+                        ${user.id !== currentUser?.id ? `<button class="action-btn delete-btn" onclick="deleteUser('${user.id}')" title="Удалить"><i class="fas fa-trash"></i></button>` : ''}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderObjectsTable() {
+            const tbody = document.getElementById('objectsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = objects.map(obj => `
+                <tr>
+                    <td>${obj.id}</td>
+                    <td>${obj.name}</td>
+                    <td>${obj.address}</td>
+                    <td>${obj.type}</td>
+                    <td>${obj.date}</td>
+                    <td><span class="badge ${obj.status === 'Активный' ? 'badge-success' : 'badge-danger'}">${obj.status}</span></td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="openEditModal('object', '${obj.id}')" title="Редактировать"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete-btn" onclick="deleteObject('${obj.id}')" title="Удалить"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderEmployeesTable() {
+            const tbody = document.getElementById('employeesTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = employees.map(emp => `
+                <tr>
+                    <td>${emp.id}</td>
+                    <td>${emp.name}</td>
+                    <td>${emp.position}</td>
+                    <td>${emp.rank || ''}</td>
+                    <td>${emp.department}</td>
+                    <td>${emp.date}</td>
+                    <td><span class="badge ${emp.status === 'Работает' ? 'badge-success' : 'badge-danger'}">${emp.status}</span></td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="openEditModal('employee', '${emp.id}')" title="Редактировать"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete-btn" onclick="deleteEmployee('${emp.id}')" title="Удалить"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminStaffTable() {
+            const tbody = document.getElementById('adminStaffTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = employees.map(emp => `
+                <tr>
+                    <td>${emp.id}</td>
+                    <td>${emp.name}</td>
+                    <td>${emp.position}</td>
+                    <td>${emp.rank || ''}</td>
+                    <td>${emp.department}</td>
+                    <td>${emp.date}</td>
+                    <td><span class="badge ${emp.status === 'Работает' ? 'badge-success' : 'badge-danger'}">${emp.status}</span></td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="openEditModal('employee', '${emp.id}')" title="Редактировать"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete-btn" onclick="deleteAdminEmployee('${emp.id}')" title="Удалить"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderBookingsTable() {
+            const tbody = document.getElementById('bookingsTableBody');
+            if (!tbody) return;
+            const today = new Date().toISOString().split('T')[0];
+            tbody.innerHTML = appointments.map(apt => `
+                <tr>
+                    <td>${apt.id}</td>
+                    <td>${apt.clientName}</td>
+                    <td>${apt.date}</td>
+                    <td>${apt.time}</td>
+                    <td>${apt.serviceType}</td>
+                    <td><span class="badge ${apt.date >= today ? 'badge-success' : 'badge-warning'}">${apt.date >= today ? 'Активна' : 'Завершена'}</span></td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="openEditModal('booking', '${apt.id}')" title="Редактировать"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete-btn" onclick="deleteAppointment('${apt.id}')" title="Удалить"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const currentMonthElement = document.getElementById('currentMonth');
+            if(!calendarGrid) return;
+            currentMonthElement.textContent = `${months[currentMonth]} ${currentYear}`;
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            let calendarHTML = '';
+            for (let i = 0; i < (firstDay === 0 ? 6 : firstDay - 1); i++) {
+                calendarHTML += '<div class="calendar-day" style="opacity: 0.3; background: transparent;"></div>';
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayAppointments = appointments.filter(a => a.date === dateStr);
+                const isToday = (day === new Date().getDate() && currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear());
+                calendarHTML += `<div class="calendar-day ${isToday ? 'today' : ''} ${dayAppointments.length > 0 ? 'has-appointment' : ''}" onclick="selectDate('${dateStr}')"><div class="day-number">${day}</div>${dayAppointments.slice(0, 2).map(a => `<div class="appointment-preview">${a.time} - ${a.clientName}</div>`).join('')}${dayAppointments.length > 0 ? '<div class="appointment-indicator"></div>' : ''}</div>`;
+            }
+            calendarGrid.innerHTML = calendarHTML;
+        }
+
+        function changeMonth(delta) { currentMonth += delta; if (currentMonth < 0) { currentMonth = 11; currentYear--; } if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(); }
+        function goToToday() { const today = new Date(); currentMonth = today.getMonth(); currentYear = today.getFullYear(); renderCalendar(); }
+        function selectDate(dateStr) { if (!currentUser) { alert('Для выбора даты необходимо авторизоваться'); openAuthModal(); return; } document.getElementById('appointmentDate').value = dateStr; openModal(); renderTimeSlots(dateStr); }
+        function renderTimeSlots(dateStr) { const container = document.getElementById('timeSlots'); if(!container) return; const bookedTimes = appointments.filter(a => a.date === dateStr).map(a => a.time); container.innerHTML = timeSlots.map(time => `<div class="time-slot ${bookedTimes.includes(time) ? 'disabled' : ''}" data-time="${time}" onclick="selectTime('${time}')">${time}</div>`).join(''); }
+        function selectTime(time) { document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected')); const selected = document.querySelector(`.time-slot[data-time="${time}"]`); if (selected && !selected.classList.contains('disabled')) selected.classList.add('selected'); }
+        function openModal(appointment = null) { const modal = document.getElementById('appointmentModal'); if (appointment) { document.getElementById('modalTitle').textContent = 'Редактирование записи'; document.getElementById('appointmentId').value = appointment.id; document.getElementById('clientName').value = appointment.clientName; document.getElementById('clientPhone').value = appointment.clientPhone; document.getElementById('clientEmail').value = appointment.clientEmail; document.getElementById('appointmentDate').value = appointment.date; document.getElementById('serviceType').value = appointment.serviceType; document.getElementById('comments').value = appointment.comments || ''; renderTimeSlots(appointment.date); setTimeout(() => { const slot = document.querySelector(`.time-slot[data-time="${appointment.time}"]`); if (slot) slot.classList.add('selected'); }, 100); } else { document.getElementById('modalTitle').textContent = 'Новая запись на консультацию'; document.getElementById('appointmentForm').reset(); document.getElementById('appointmentId').value = ''; if (currentUser) { document.getElementById('clientName').value = currentUser.fullName; document.getElementById('clientEmail').value = currentUser.email; document.getElementById('clientPhone').value = currentUser.phone; } const selectedDate = document.getElementById('appointmentDate').value; if (selectedDate) renderTimeSlots(selectedDate); } modal.classList.add('active'); }
+        function closeModal() { document.getElementById('appointmentModal').classList.remove('active'); }
+        function saveAppointment(event) { event.preventDefault(); const selectedTime = document.querySelector('.time-slot.selected'); if (!selectedTime) { alert('Выберите время'); return false; } const appointmentData = { id: document.getElementById('appointmentId').value || Date.now().toString(), clientName: document.getElementById('clientName').value, clientPhone: document.getElementById('clientPhone').value, clientEmail: document.getElementById('clientEmail').value, date: document.getElementById('appointmentDate').value, time: selectedTime.dataset.time, serviceType: document.getElementById('serviceType').value, comments: document.getElementById('comments').value, createdAt: new Date().toISOString(), userId: currentUser ? currentUser.id : null }; if (document.getElementById('appointmentId').value) { const index = appointments.findIndex(a => a.id === appointmentData.id); if (index !== -1) appointments[index] = appointmentData; } else { appointments.push(appointmentData); } localStorage.setItem('appointments', JSON.stringify(appointments)); renderCalendar(); renderAppointmentsList(); updateStats(); if (currentUser) { renderMyAppointments(); if (currentUser.role === 'admin') renderBookingsTable(); } closeModal(); alert('Запись успешно сохранена'); return false; }
+        function editAppointment(id) { const appointment = appointments.find(a => a.id === id); if (appointment) openModal(appointment); }
+        function deleteAppointment(id) { if (confirm('Вы уверены, что хотите удалить эту запись?')) { appointments = appointments.filter(a => a.id !== id); localStorage.setItem('appointments', JSON.stringify(appointments)); renderCalendar(); renderAppointmentsList(); updateStats(); if (currentUser) { renderMyAppointments(); if (currentUser.role === 'admin') renderBookingsTable(); } alert('Запись удалена'); } }
+        function renderAppointmentsList() { const list = document.getElementById('appointmentsList'); if (!list) return; if (appointments.length === 0) { list.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--gray);"><i class="fas fa-calendar-plus" style="font-size: 3rem; margin-bottom: 1rem;"></i><p>Нет записей на консультацию</p></div>'; return; } const sortedAppointments = [...appointments].sort((a, b) => new Date(b.date + 'T' + b.time) - new Date(a.date + 'T' + a.time)); list.innerHTML = sortedAppointments.map(appointment => { const date = new Date(appointment.date + 'T' + appointment.time); const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' }); return `<div class="appointment-card"><div class="actions"><button class="action-btn edit-btn" onclick="editAppointment('${appointment.id}')" title="Редактировать"><i class="fas fa-edit"></i></button><button class="action-btn delete-btn" onclick="deleteAppointment('${appointment.id}')" title="Удалить"><i class="fas fa-trash"></i></button></div><div class="date">${dateStr}</div><div class="time">${appointment.time}</div><div class="client">${appointment.clientName}</div><div class="service">${appointment.serviceType}</div><div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">${appointment.clientPhone}</div></div>`; }).join(''); }
+        function updateStats() { const today = new Date().toISOString().split('T')[0]; document.getElementById('totalAppointments').textContent = appointments.length; document.getElementById('todayAppointments').textContent = appointments.filter(a => a.date === today).length; document.getElementById('upcomingAppointments').textContent = appointments.filter(a => a.date > today).length; }
+        function renderMyAppointments() { const list = document.getElementById('myAppointmentsList'); if (!list || !currentUser) return; const userAppointments = appointments.filter(a => a.clientEmail === currentUser.email); if (userAppointments.length === 0) { list.innerHTML = '<p style="text-align: center; color: var(--gray);">У вас пока нет записей</p>'; return; } list.innerHTML = userAppointments.map(apt => { const date = new Date(apt.date + 'T' + apt.time); const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' }); return `<div class="appointment-card"><div class="actions"><button class="action-btn delete-btn" onclick="deleteAppointment('${apt.id}')" title="Удалить"><i class="fas fa-trash"></i></button></div><div class="date">${dateStr}</div><div class="time">${apt.time}</div><div class="service">${apt.serviceType}</div><div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">Статус: ${new Date(apt.date) >= new Date() ? 'Предстоит' : 'Завершена'}</div></div>`; }).join(''); }
+        function deleteUser(id) { if (id === currentUser?.id) { alert('Нельзя удалить самого себя'); return; } if (confirm('Вы уверены, что хотите удалить пользователя?')) { users = users.filter(u => u.id !== id); localStorage.setItem('users', JSON.stringify(users)); renderUsersTable(); alert('Пользователь удален'); } }
+        function deleteObject(id) { if (confirm('Вы уверены, что хотите удалить объект?')) { objects = objects.filter(o => o.id !== id); localStorage.setItem('objects', JSON.stringify(objects)); renderObjectsTable(); alert('Объект удален'); } }
+        function deleteEmployee(id) { if (confirm('Вы уверены, что хотите удалить сотрудника?')) { employees = employees.filter(e => e.id !== id); localStorage.setItem('employees', JSON.stringify(employees)); renderEmployeesTable(); renderAdminStaffTable(); alert('Сотрудник удален'); } }
+        function deleteAdminEmployee(id) { if (confirm('Вы уверены, что хотите удалить сотрудника?')) { employees = employees.filter(e => e.id !== id); localStorage.setItem('employees', JSON.stringify(employees)); renderAdminStaffTable(); renderEmployeesTable(); alert('Сотрудник удален'); } }
+        function switchAdminTab(tab) { const tabs = document.querySelectorAll('.admin-tab'); const panels = document.querySelectorAll('.admin-panel'); tabs.forEach(t => t.classList.remove('active')); panels.forEach(p => p.classList.remove('active')); if(event && event.target) event.target.classList.add('active'); document.getElementById('admin' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active'); }
+        function checkAuthAndBook() { if (!currentUser) { alert('Для записи необходимо авторизоваться'); openAuthModal(); } else { openModal(); } }
+        function openBooking(service) { if (!currentUser) { alert('Для заказа услуги необходимо авторизоваться'); openAuthModal(); return; } openModal(); setTimeout(() => { document.getElementById('serviceType').value = service; }, 100); }
+        function animateCounter(element, start, end, duration) { if(!element) return; let startTimestamp = null; const step = (timestamp) => { if (!startTimestamp) startTimestamp = timestamp; const progress = Math.min((timestamp - startTimestamp) / duration, 1); element.innerHTML = Math.floor(progress * (end - start) + start); if (progress < 1) window.requestAnimationFrame(step); }; window.requestAnimationFrame(step); }
+        function initializeCounters() { animateCounter(document.getElementById('activeObjects'), 0, 127, 2000); animateCounter(document.getElementById('activeStaff'), 0, 45, 2000); animateCounter(document.getElementById('responseTime'), 0, 4, 2000); }
+        function filterAllTables(searchTerm) { const tables = ['objectsTable', 'employeesTable']; tables.forEach(tableId => { const table = document.getElementById(tableId); if (!table) return; const rows = table.getElementsByTagName('tr'); for (let i = 1; i < rows.length; i++) { const cells = rows[i].getElementsByTagName('td'); let found = false; for (let j = 0; j < cells.length; j++) { if (cells[j].textContent.toLowerCase().includes(searchTerm.toLowerCase())) { found = true; break; } } rows[i].style.display = found ? '' : 'none'; } }); }
+        function initializeMobileMenu() { const menuBtn = document.querySelector('.mobile-menu-btn'); const nav = document.querySelector('nav ul'); if (menuBtn && nav) { menuBtn.addEventListener('click', () => { nav.classList.toggle('active'); menuBtn.innerHTML = nav.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; }); nav.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { nav.classList.remove('active'); menuBtn.innerHTML = '<i class="fas fa-bars"></i>'; }); }); } }
+        function toggleTheme() { document.body.classList.toggle('dark-theme'); const themeBtn = document.querySelector('.theme-switch i'); if (document.body.classList.contains('dark-theme')) { themeBtn.className = 'fas fa-sun'; } else { themeBtn.className = 'fas fa-moon'; } localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light'); }
+        function loadSavedTheme() { const savedTheme = localStorage.getItem('theme'); if (savedTheme === 'dark') { document.body.classList.add('dark-theme'); document.querySelector('.theme-switch i').className = 'fas fa-sun'; } }
+        function subscribeNewsletter() { const email = document.getElementById('newsletterEmail').value; if (email) { alert('Спасибо за подписку!'); document.getElementById('newsletterEmail').value = ''; } else { alert('Введите email'); } }
+        function initializeProfileDropdown() { const profileBtn = document.getElementById('profileBtn'); const dropdown = document.getElementById('profileDropdown'); if(profileBtn && dropdown) { profileBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('active'); }); document.addEventListener('click', () => { dropdown.classList.remove('active'); }); dropdown.addEventListener('click', (e) => { e.stopPropagation(); }); } document.getElementById('loginMenuItem')?.addEventListener('click', () => { showLoginForm(); openAuthModal(); }); document.getElementById('registerMenuItem')?.addEventListener('click', () => { showRegisterForm(); openAuthModal(); }); document.getElementById('profileMenuItem')?.addEventListener('click', () => { showProfile(); }); document.getElementById('adminMenuItem')?.addEventListener('click', () => { showAdminPanel(); }); document.getElementById('myAppointmentsMenuItem')?.addEventListener('click', () => { showMyAppointments(); }); document.getElementById('logoutMenuItem')?.addEventListener('click', () => { logout(); }); }
+        function openAuthModal() { document.getElementById('authModal').classList.add('active'); }
+        function closeAuthModal() { document.getElementById('authModal').classList.remove('active'); }
+        function showLoginForm() { document.getElementById('authModalTitle').textContent = 'Вход в личный кабинет'; document.getElementById('loginForm').style.display = 'block'; document.getElementById('registerForm').style.display = 'none'; }
+        function showRegisterForm() { document.getElementById('authModalTitle').textContent = 'Регистрация'; document.getElementById('loginForm').style.display = 'none'; document.getElementById('registerForm').style.display = 'block'; }
+        function login() { const email = document.getElementById('loginEmail').value; const password = document.getElementById('loginPassword').value; const user = users.find(u => u.email === email && u.password === password); if (user) { currentUser = user; localStorage.setItem('currentUser', JSON.stringify(user)); closeAuthModal(); updateUIForUser(); alert('Успешный вход! Добро пожаловать, ' + user.fullName); if (user.role === 'admin') { showAdminPanel(); } else { showProfile(); } } else { alert('Неверный email или пароль'); } }
+        function register() { const fullName = document.getElementById('regFullName').value; const email = document.getElementById('regEmail').value; const phone = document.getElementById('regPhone').value; const password = document.getElementById('regPassword').value; const passwordConfirm = document.getElementById('regPasswordConfirm').value; const agree = document.getElementById('agreeTerms').checked; if (!fullName || !email || !phone || !password) { alert('Заполните все поля'); return; } if (password !== passwordConfirm) { alert('Пароли не совпадают'); return; } if (!agree) { alert('Необходимо согласие с условиями'); return; } if (users.some(u => u.email === email)) { alert('Пользователь с таким email уже существует'); return; } const newUser = { id: Date.now().toString(), fullName, email, phone, password, role: 'client', registeredAt: new Date().toISOString() }; users.push(newUser); localStorage.setItem('users', JSON.stringify(users)); currentUser = newUser; localStorage.setItem('currentUser', JSON.stringify(newUser)); closeAuthModal(); updateUIForUser(); alert('Регистрация успешна!'); showProfile(); }
+        function logout() { currentUser = null; localStorage.removeItem('currentUser'); updateUIForUser(); alert('Вы вышли из системы'); document.getElementById('profile').style.display = 'none'; document.getElementById('admin').style.display = 'none'; window.scrollTo(0, 0); }
+        function showProfile() { if (!currentUser) { openAuthModal(); return; } document.getElementById('profileFullName').textContent = currentUser.fullName; document.getElementById('profileEmail').textContent = currentUser.email; document.getElementById('profilePhone').textContent = currentUser.phone; document.getElementById('profileRegDate').textContent = new Date(currentUser.registeredAt).toLocaleDateString(); const userAppointments = appointments.filter(a => a.clientEmail === currentUser.email); document.getElementById('profileTotalBookings').textContent = userAppointments.length; const today = new Date().toISOString().split('T')[0]; const active = userAppointments.filter(a => a.date >= today).length; const completed = userAppointments.filter(a => a.date < today).length; document.getElementById('profileActiveBookings').textContent = active; document.getElementById('profileCompletedBookings').textContent = completed; renderMyAppointments(); document.getElementById('profile').style.display = 'block'; document.getElementById('admin').style.display = 'none'; document.getElementById('profile').scrollIntoView({ behavior: 'smooth' }); }
+        function showAdminPanel() { if (!currentUser || currentUser.role !== 'admin') { alert('Доступ запрещен'); return; } document.getElementById('totalUsers').textContent = users.length; document.getElementById('totalBookings').textContent = appointments.length; document.getElementById('totalObjects').textContent = objects.length; document.getElementById('totalStaff').textContent = employees.length; renderUsersTable(); renderBookingsTable(); renderAdminStaffTable(); document.getElementById('profile').style.display = 'none'; document.getElementById('admin').style.display = 'block'; document.getElementById('admin').scrollIntoView({ behavior: 'smooth' }); }
+        function showMyAppointments() { if (!currentUser) { openAuthModal(); return; } showProfile(); }
+
+        function updateUIForUser() {
+            const profileBtnText = document.getElementById('profileBtnText');
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            const dropdownUserRole = document.getElementById('dropdownUserRole');
+            const databaseSection = document.getElementById('database');
+            const mapSection = document.getElementById('map-section');
+            
+            if (currentUser) {
+                profileBtnText.textContent = currentUser.fullName.split(' ')[0];
+                dropdownUserName.textContent = currentUser.fullName;
+                dropdownUserRole.textContent = currentUser.role === 'admin' ? 'Администратор' : 'Клиент';
+                document.getElementById('loginMenuItem').style.display = 'none';
+                document.getElementById('registerMenuItem').style.display = 'none';
+                document.getElementById('authDivider').style.display = 'none';
+                document.getElementById('profileMenuItem').style.display = 'block';
+                document.getElementById('myAppointmentsMenuItem').style.display = 'block';
+                document.getElementById('profileDivider').style.display = 'block';
+                document.getElementById('logoutMenuItem').style.display = 'block';
+                
+                if (currentUser.role === 'admin') {
+                    document.getElementById('adminMenuItem').style.display = 'block';
+                    if (databaseSection) databaseSection.style.display = 'block';
+                    if (mapSection) mapSection.style.display = 'block';
+                    renderObjectsTable();
+                    renderEmployeesTable();
+                    renderAdminStaffTable();
+                    renderUsersTable();
+                    renderBookingsTable();
+                    document.getElementById('totalUsers').textContent = users.length;
+                    document.getElementById('totalBookings').textContent = appointments.length;
+                    document.getElementById('totalObjects').textContent = objects.length;
+                    document.getElementById('totalStaff').textContent = employees.length;
+                } else {
+                    document.getElementById('adminMenuItem').style.display = 'none';
+                    if (databaseSection) databaseSection.style.display = 'none';
+                    if (mapSection) mapSection.style.display = 'none';
+                }
+            } else {
+                profileBtnText.textContent = 'Войти';
+                dropdownUserName.textContent = 'Гость';
+                dropdownUserRole.textContent = 'Не авторизован';
+                document.getElementById('loginMenuItem').style.display = 'block';
+                document.getElementById('registerMenuItem').style.display = 'block';
+                document.getElementById('authDivider').style.display = 'block';
+                document.getElementById('profileMenuItem').style.display = 'none';
+                document.getElementById('adminMenuItem').style.display = 'none';
+                document.getElementById('myAppointmentsMenuItem').style.display = 'none';
+                document.getElementById('profileDivider').style.display = 'none';
+                document.getElementById('logoutMenuItem').style.display = 'none';
+                if (databaseSection) databaseSection.style.display = 'none';
+                if (mapSection) mapSection.style.display = 'none';
+                document.getElementById('profile').style.display = 'none';
+                document.getElementById('admin').style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTestData();
+            initializeCounters();
+            renderCalendar();
+            renderAppointmentsList();
+            updateStats();
+            initializeMobileMenu();
+            loadSavedTheme();
+            updateUIForUser();
+            initializeProfileDropdown();
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('appointmentDate');
+            if(dateInput) dateInput.min = today;
+            if(dateInput) dateInput.addEventListener('change', function() { renderTimeSlots(this.value); });
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+
+        window.changeMonth = changeMonth;
+        window.goToToday = goToToday;
+        window.selectDate = selectDate;
+        window.selectTime = selectTime;
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.checkAuthAndBook = checkAuthAndBook;
+        window.openBooking = openBooking;
+        window.switchAdminTab = switchAdminTab;
+        window.filterAllTables = filterAllTables;
+        window.editAppointment = editAppointment;
+        window.deleteAppointment = deleteAppointment;
+        window.deleteUser = deleteUser;
+        window.deleteObject = deleteObject;
+        window.deleteEmployee = deleteEmployee;
+        window.deleteAdminEmployee = deleteAdminEmployee;
+        window.toggleTheme = toggleTheme;
+        window.login = login;
+        window.register = register;
+        window.closeAuthModal = closeAuthModal;
+        window.showLoginForm = showLoginForm;
+        window.showRegisterForm = showRegisterForm;
+        window.subscribeNewsletter = subscribeNewsletter;
+        window.openEditModal = openEditModal;
+        window.saveEdit = saveEdit;
+        window.closeEditModal = closeEditModal;
+        window.renderUsersTable = renderUsersTable;
+        window.renderObjectsTable = renderObjectsTable;
+        window.renderEmployeesTable = renderEmployeesTable;
+        window.renderAdminStaffTable = renderAdminStaffTable;
+        window.renderBookingsTable = renderBookingsTable;
+        window.renderMyAppointments = renderMyAppointments;
+        window.showProfile = showProfile;
+        window.showAdminPanel = showAdminPanel;
+    </script>
+    
+    <script>
+    (function() {
+        function smoothScrollTo(targetElement) {
+            if (!targetElement) return;
+            const header = document.querySelector('header');
+            const nav = document.querySelector('nav');
+            let headerHeight = 0;
+            if (header) headerHeight += header.offsetHeight;
+            if (nav && nav.offsetHeight) headerHeight += nav.offsetHeight;
+            if (window.innerWidth <= 768) headerHeight = 70;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+        document.addEventListener('click', function(e) {
+            let link = e.target.closest('a');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (!href || href === '#' || !href.startsWith('#')) return;
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                smoothScrollTo(targetElement);
+                if (history.pushState) history.pushState(null, null, href);
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
